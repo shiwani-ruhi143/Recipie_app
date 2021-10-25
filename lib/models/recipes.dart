@@ -60,8 +60,9 @@ class RecipieSteps{
 }
 List<Steps> generateSteps(Map<String,dynamic>map){
   List<Steps> listOfsteps=[];
-  for(Steps myStep in map['steps']){
-     listOfsteps.add(myStep);
+  for(var myStep in map['steps']){
+    Steps startStep=Steps.fromMap(myStep);
+     listOfsteps.add(startStep);
   }
   return listOfsteps;
 }

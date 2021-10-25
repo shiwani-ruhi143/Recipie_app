@@ -33,9 +33,9 @@ class _RecipeTilesState extends State<RecipeTiles> {
     print('recipietile pressed');
     recipieDetails=await fetching_recipe_info(widget.id!);
     list= await fetching_steps(widget.id!);
-    print(list);
-    
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchResult(recipiedetails: recipieDetails,)));
+    for(var abc in list.steps!)
+       print(abc.step);
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchResult(recipiedetails: recipieDetails,step_s: list,)));
   }
   @override
   Widget build(BuildContext context) {
