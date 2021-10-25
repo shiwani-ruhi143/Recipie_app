@@ -33,6 +33,7 @@ class _RecipeTilesState extends State<RecipeTiles> {
     print('recipietile pressed');
     recipieDetails=await fetching_recipe_info(widget.id!);
     list= await fetching_steps(widget.id!);
+  
     for(var abc in list.steps!)
        print(abc.step);
     Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchResult(recipiedetails: recipieDetails,step_s: list,)));
@@ -89,6 +90,7 @@ class _HomepageState extends State<Homepage> {
      
     RecipeList recipies;
     recipies = await fetching_list(recipe_name.text);
+    
     setState(() {
       print('set state called');
       searchList.clear();
