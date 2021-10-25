@@ -80,7 +80,7 @@ class _MoveToHomepageState extends State<MoveToHomepage> {
                            style: TextStyle(
                              fontFamily: 'Lobester',
                              fontSize: 25,
-                             color: Colors.white
+                             color: Colors.white,
                            ),
                           ),
                     ),

@@ -19,3 +19,11 @@ Future<Recipe> fetching_recipe_info(int id)async{
       http.Response response=await http.get(url);
       return Recipe.fromMap(jsonDecode(response.body));
 }
+
+Future<RecipieSteps> fetching_steps(int id)async{
+  var url=Uri.parse("https://api.spoonacular.com/recipes/$id/analyzedInstructions?apiKey=221f864b349b4157bc696db36b382397");
+  http.Response reponse=await http.get(url);
+  
+  return RecipieSteps.fromMap(jsonDecode(reponse.body)[0]);
+  
+}

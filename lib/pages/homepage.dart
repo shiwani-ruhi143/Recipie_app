@@ -26,10 +26,14 @@ class RecipeTiles extends StatefulWidget {
 }
 
 class _RecipeTilesState extends State<RecipeTiles> {
+
   void RecipieInfo()async{
     Recipe recipieDetails;
+    RecipieSteps list;
     print('recipietile pressed');
     recipieDetails=await fetching_recipe_info(widget.id!);
+    list= await fetching_steps(widget.id!);
+    print(list);
     
     Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchResult(recipiedetails: recipieDetails,)));
   }
@@ -40,19 +44,30 @@ class _RecipeTilesState extends State<RecipeTiles> {
       child: InkWell(
         onTap: (){
             RecipieInfo();
+
         },
         child: Container(
-             child: Column(
-               children: [
-                
-                Image.network(widget.image!,height: 300,width: double.infinity,),
-                 Text(widget.title!,
-                   style: TextStyle(
-                       fontSize: 25,
+          color: Color(0xFFFFBA53),
+             child: Padding(
+               padding: const EdgeInsets.fromLTRB(50, 0,50, 20),
+               child: Column(
+                 children: [
+                  
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0,10,0,0),
+                    child: Image.network(widget.image!,width: double.infinity,),
+                  ),
+                   Padding(
+                     padding: const EdgeInsets.fromLTRB(10,20,20,10),
+                     child: Text(widget.title!,
+                       style: TextStyle(
+                           fontSize: 25,
+                       ),
+                     ),
                    ),
-                 ),
-                
-               ],
+                  
+                 ],
+               ),
              ),
         ),
       ),
@@ -71,11 +86,12 @@ class _HomepageState extends State<Homepage> {
    TextEditingController recipe_name = TextEditingController();
    List<Widget> searchList=[];
   void searchFunction() async {
-  
+     
     RecipeList recipies;
     recipies = await fetching_list(recipe_name.text);
     setState(() {
       print('set state called');
+      searchList.clear();
       for (Recipe item in recipies.listofRecipe ?? []) {
 
        searchList.add(
@@ -118,7 +134,17 @@ class _HomepageState extends State<Homepage> {
                           begin: Alignment.topRight,
                           end: Alignment.bottomLeft,
                           colors: <Color>[Color(0xFFFFE082), Color(0xFFFFBA53)],
-                          tileMode: TileMode.repeated)),
+                          tileMode: TileMode.repeated
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color:Colors.black,
+                              blurRadius: 7.0,
+                              
+                              offset: Offset(0,1),
+                            )
+                          ]
+                          ),
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 40, 20, 9),
                     child: TextField(
@@ -136,8 +162,11 @@ class _HomepageState extends State<Homepage> {
                       controller: recipe_name,
                       onEditingComplete: searchFunction,
                     ),
-                  )),
-                ...searchList,
+                  )
+                  ),
+                //...searchList,
+                for(var item in searchList)
+                      item
                 
             ],
           ),
